@@ -49,7 +49,7 @@
           val = $field.is(':checked');
           break;
         case 'select':
-          if($field.val()) {
+          if($field.val() || $field.val() == '') {
             val = $field.val().toString();
           }
           break;
