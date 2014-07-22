@@ -22,7 +22,7 @@
         'silent' : false,
         'addRemoveFieldsMarksDirty' : false,
         'fieldEvents' : 'change keyup propertychange input',
-        'fieldSelector': ":input:not(input[type=submit]):not(input[type=button])"
+        'fieldSelector': ":input:not(input[type=submit]):not(input[type=button]):not(button)"
       }, options);
 
     var getValue = function($field) {
@@ -30,8 +30,16 @@
           || $field.hasClass('aysIgnore')
           || $field.attr('data-ays-ignore')
           || $field.attr('name') === undefined) {
-        return null;
-      }
+                return true;
+            }
+            return false;
+        };
+        
+        var getValue = function ($field) {
+
+        if (isIgnored($field)) {
+          return null;
+        }
 
       if ($field.is(':disabled')) {
         return 'ays-disabled';
@@ -67,6 +75,10 @@
     var checkForm = function(evt) {
 
       var isFieldDirty = function($field) {
+                if (isIgnored($field)) {
+                    return false;
+                }
+
         var origValue = $field.data('ays-orig');
         if (undefined === origValue) {
           return false;
