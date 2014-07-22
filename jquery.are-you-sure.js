@@ -25,7 +25,7 @@
         'fieldSelector': ":input:not(input[type=submit]):not(input[type=button]):not(button)"
       }, options);
 
-    var getValue = function($field) {
+		var isIgnored = function ($field) {
       if ($field.hasClass('ays-ignore')
           || $field.hasClass('aysIgnore')
           || $field.attr('data-ays-ignore')
@@ -35,11 +35,11 @@
             return false;
         };
         
-        var getValue = function ($field) {
+		var getValue = function ($field) {
 
-        if (isIgnored($field)) {
-          return null;
-        }
+            if (isIgnored($field)) {
+        return null;
+      }
 
       if ($field.is(':disabled')) {
         return 'ays-disabled';
